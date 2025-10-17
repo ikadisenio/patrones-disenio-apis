@@ -1,0 +1,60 @@
+<div class="row" style="margin:10px">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header" style="background-color: rgb(194, 219, 245);">
+                <h5>Registro de Nuevo Empleado</h5>
+            </div>
+                
+            <div class="card-body" style="background-color: rgb(255, 255, 255);">
+                <form #empleadoForm="ngForm" > 
+                    
+                    <div class="form-group"> 
+                        <input type="text" class="form-control" name="nombre" placeholder="Ingrese su nombre" [(ngModel)]="empleadoService.selectedEmpleado.nombre"> 
+                    </div> 
+                    <div class="form-group"> 
+                        <input type="text" class="form-control" name="cargo" placeholder="Ingrese su cargo" [(ngModel)]="empleadoService.selectedEmpleado.cargo"> 
+                    </div> 
+                    <div class="form-group"> 
+                        <input type="text" class="form-control" name="departamento" placeholder="Ingrese su departamento" [(ngModel)]="empleadoService.selectedEmpleado.departamento"> 
+                    </div> 
+                    <div class="form-group"> 
+                        <input type="number" class="form-control" name="sueldo" placeholder="Ingrese su sueldo" [(ngModel)]="empleadoService.selectedEmpleado.sueldo"> 
+                    </div> 
+                   
+                    <button class="waves-effect waves-light btn-small green darken-2" (click)="empleadoService.selectedEmpleado._id ? updateEmpleado() : addEmpleado(empleadoForm)">
+                        {{ empleadoService.selectedEmpleado._id ? 'Actualizar' : 'Guardar' }}
+                        <i class="material-icons right">save</i> 
+                    </button>
+                    &nbsp;
+                    <button class="waves-effect waves-light btn-small grey" (click)="resetForm()"><i class="material-icons right">highlight_off</i>Cancelar</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-md-8" style="background-color: rgb(255, 255, 255);">
+        <br>
+        <table class="striped highlight">
+            <thead>
+                <tr class="centered">
+                    <th>Nombre</th>
+                    <th>Cargo</th>
+                    <th>Departamento</th>
+                    <th>Operaciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let empleado of empleadoService.empleados">
+                    <td>{{empleado.nombre}}</td>
+                    <td>{{empleado.cargo}}</td>
+                    <td>{{empleado.departamento}}</td>
+                    <td class="centered">
+                        <button class="waves-effect waves-light btn-small grey darken-1" (click)="loadEmpleado(empleado)"><i class="material-icons right">drive_file_rename_outline</i> Actualizar</button>
+                        &nbsp;
+                        <button class="waves-effect waves-light btn-small red darken-4" (click)="deleteEmpleado(empleado)"><i class="material-icons right">delete_outline</i>Eliminar</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
